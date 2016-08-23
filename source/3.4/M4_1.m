@@ -1,2 +1,27 @@
-H = [3.16991321031250,52.4425641326457,2.73475152482102;-8.76695007100685,43.4831885343255,-37.1705395356264;-1.59218748085971,-24.3510937156625,12.8339630267640];  
-[U,S,V] = svd(H);  
+clear all; close all;
+
+L = [3,4,5];
+
+common_dir = dir('../../resource/Faces');
+
+for i = length(common_dir):-1:1
+    if(strcmp(common_dir(i).name, '.') || strcmp(common_dir(i).name, '..') ...
+            || strcmp(common_dir(i).name, '.DS_Store'))
+        common_dir(i) = [];
+    end
+end
+
+for ii = 1:3
+v = zeros(length(common_dir), 2^(3 * L(ii)));
+
+for i = 1:length(common_dir)
+    img = imread(['../../resource/Faces/' common_dir(i).name]);
+    img = quantized_pic(img, L(ii));
+    v(i,:) = get_feature(img, L(ii));
+end
+v_mean = mean(v, 1);
+subplot(3,1,ii)
+plot(1:length(v_mean),v_mean);
+end
+save features.mat v_mean
+saveas(gcf, 'L_from_three_to_five.bmp');
