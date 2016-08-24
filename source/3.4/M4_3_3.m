@@ -44,10 +44,14 @@ for k = 2:length(sample)
         j = sample(D_order(k)).j;
         selected_pos(length(selected_pos)+1).i = sample(D_order(k)).i;
         selected_pos(length(selected_pos)).j = sample(D_order(k)).j;
-        img(i:i+square_length-1,j,1:3) = uint8(255);
-        img(i:i+square_length-1,j+square_length-1,1:3) = uint8(255);
-        img(i,j:j+square_length-1,1:3) = uint8(255);
-        img(i+square_length-1,j:j+square_length-1,1:3) = uint8(255);
+        img(i:i+square_length-1,j,1) = uint8(255);
+        img(i:i+square_length-1,j,2:3) = uint8(0);
+        img(i:i+square_length-1,j+square_length-1,1) = uint8(255);
+        img(i:i+square_length-1,j+square_length-1,2:3) = uint8(0);        
+        img(i,j:j+square_length-1,1) = uint8(255);        
+        img(i,j:j+square_length-1,2:3) = uint8(0);
+        img(i+square_length-1,j:j+square_length-1,1) = uint8(255);
+        img(i+square_length-1,j:j+square_length-1,2:3) = uint8(0);
     end
 end
 
