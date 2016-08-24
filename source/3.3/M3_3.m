@@ -1,9 +1,9 @@
 close all; clear all;
 
-UpperT = 10;
-LowerT = -10;
+UpperT = 6;
 %% Code
-Data = ['MATLAB is good!'];
+Data = ['MATLAB (matrix laboratory) is a multi-paradigm numerical computing ' ...
+    'environment and fourth-generation programming language.'];
 
 Datalen = length(Data);
 Hidebitlen = Datalen * 8 + 8;
@@ -15,7 +15,7 @@ hwlen = size(hall_gray);
 newhwlen = ceil(hwlen/8)*8;
 newimg = zeros(newhwlen);
 
-if(newhwlen(1)*newhwlen(2)/32 < Hidebitlen)
+if(newhwlen(1)*newhwlen(2)/16 < Hidebitlen)
     error 'Image not big enough!';
 end
 
@@ -42,14 +42,47 @@ for i = 1:newhwlen(1)/8
         c = dct2(newimg(8*i-7:8*i,8*j-7:8*j)-128);
         c = round(c ./ QTAB);
         order = c(zigzag(8));
-        order = uint8(order);
-        pos = find(order > UpperT | order < LowerT - 1);
+        pos = find(order >= UpperT | order <= -UpperT + 1);
         if(~isempty(pos))
             for ii = 1:length(pos)
                 if(k > Hidebitlen)
                     break;
                 end
-                order(pos(ii)) = bitset(order(pos(ii)), 1, HiddenData(k));
+                if(order(pos(ii))>0)
+                    order(pos(ii)) = double(bitset(uint8(order(pos(ii))), 1, HiddenData(k)));
+                else
+                    tempcom = dec2bin(-order(pos(ii))) - '0';
+                    tempcom = 1 - tempcom;
+                    tempcom(length(tempcom)) = tempcom(length(tempcom)) + 1;
+                    while(~isempty(find(tempcom>1, 1, 'last')))
+                        pos2 = find(tempcom>1, 1, 'last');
+                        if(pos2~=1)
+                            tempcom(pos2) = 0;
+                            tempcom(pos2 - 1) = tempcom(pos2 - 1) + 1;
+                        else
+                            tempcom(pos2) = 0;
+                            tempcom = [1 tempcom];
+                        end
+                    end
+                    tempcomlen = length(tempcom);
+                    tempcom = bin2dec(num2str(tempcom));
+                    tempcom = double(bitset(uint8(tempcom), 1, HiddenData(k)));
+                    tempcom = dec2bin(tempcom, tempcomlen) - '0';
+                    tempcom = 1 - tempcom;
+                    tempcom(length(tempcom)) = tempcom(length(tempcom)) + 1;
+                    while(~isempty(find(tempcom>1, 1, 'last')))
+                        pos2 = find(tempcom>1, 1, 'last');
+                        if(pos2~=1)
+                            tempcom(pos2) = 0;
+                            tempcom(pos2 - 1) = tempcom(pos2 - 1) + 1;
+                        else
+                            tempcom(pos2) = 0;
+                            tempcom = [1 tempcom];
+                        end
+                    end
+                    tempcom = -bin2dec(num2str(tempcom));
+                    order(pos(ii)) = double(tempcom);
+                end
                 k = k + 1;
             end               
         end
@@ -237,10 +270,17 @@ j = 0;
 decodeBit = [];
 for i = 1:size(coef,2)
     temp = coef(:,i);
-    pos = find(temp >= UpperT | temp <= LowerT - 1);
+    pos = find(temp >= UpperT | temp <= -UpperT + 1);
     if(~isempty(pos))
         for ii = 1:length(pos)
-            decodeBit = [decodeBit, num2str(bitget(temp(pos(ii)), 1))];
+            if(temp(pos(ii))>0)
+                decodeBit = [decodeBit, num2str(bitget(uint8(temp(pos(ii))), 1))];
+            else
+                tempcom = dec2bin(-temp(pos(ii))) - '0';
+                tempcom = 1 - tempcom;
+                tempcom(length(tempcom)) = tempcom(length(tempcom)) + 1;
+                decodeBit = [decodeBit, num2str(mod(tempcom(length(tempcom)),2))];
+            end
         end
     end
     currentblock(zigzag(8)) = coef(:,i);
@@ -254,7 +294,7 @@ for i = 1:size(coef,2)
 end
 img = uint8(img+128);
 imshow(img);
-imwrite(img, 'thirdhidden.jpg');
+imwrite(img, 'myselfhidden.jpg');
 
 bitlen = bin2dec(decodeBit(1:8));
 bitofchrac = [];
