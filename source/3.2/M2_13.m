@@ -81,6 +81,9 @@ end
 height = newhwlen(1);
 width = newhwlen(2);
 
+ratio = size(snow,1)*size(snow,2)*8/length([Dc_ceof Ac_ceof])
+
+%% Decode
 coef = zeros(64, height*width/64);
 diff = zeros(1, height*width/64);
 DC_Huff = DCTAB(:,2:size(DCTAB,2));
@@ -213,4 +216,8 @@ end
 img = img + 128;
 imshow(uint8(img));
 imwrite(im2uint8(img), 'decodesnow.jpg');
+imwrite(snow, 'snow.jpg');
 psnrvalue = psnr(uint8(img), snow)
+
+% ratio = 3.6450
+% psnrvalue = 22.9244

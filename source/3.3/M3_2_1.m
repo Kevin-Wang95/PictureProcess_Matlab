@@ -40,7 +40,7 @@ for i = 1:newhwlen(1)/8
         c = dct2(newimg(8*i-7:8*i,8*j-7:8*j)-128);
         c = round(c ./ QTAB);
         if(k <= Datalen)
-            c = uint8(c);
+            c = int8(c);
             if(i == 1 && j == 1)
                 for k = 1:32
                     c(k) = bitset(c(k), 1, Datalenbit(k));
@@ -252,12 +252,12 @@ for i = 1:size(coef,2)
     if(decodeflag)
         if(i == 1)
             for k = 1:32
-                temp = bitget(block88(k),1);
+                temp = bitget(int8(block88(k)),1);
                 bitoflen = [bitoflen num2str(temp)];
             end
             bitlen = bin2dec(bitoflen);
             for k = 33:64
-                temp = bitget(block88(k),1);
+                temp = bitget(int8(block88(k)),1);
                 bitofchrac = [bitofchrac num2str(temp)];
                 if(~mod(k,8))
                     GetData = [GetData char(bin2dec(bitofchrac))];
@@ -269,7 +269,7 @@ for i = 1:size(coef,2)
                 if(j*8 + ceil(k/8) > bitlen + 4)
                     decodeflag = false;
                 end
-                temp = bitget(block88(k),1);
+                temp = bitget(int8(block88(k)),1);
                 bitofchrac = [bitofchrac num2str(temp)];
                 if(~mod(k,8))
                     GetData = [GetData char(bin2dec(bitofchrac))];
@@ -288,7 +288,7 @@ for i = 1:size(coef,2)
 end
 img = img + 128;
 imshow(uint8(img));
-imwrite(im2uint8(img), 'firsthidden.jpg');
+imwrite(uint8(img), 'firsthidden.jpg');
 
 psnrvalue = psnr(uint8(img), hall_gray)
 % save Dc_ceof Ac_ceof height width

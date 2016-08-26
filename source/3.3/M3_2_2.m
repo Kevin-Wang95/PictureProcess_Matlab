@@ -40,10 +40,9 @@ for i = 1:newhwlen(1)/8
         c = dct2(newimg(8*i-7:8*i,8*j-7:8*j)-128);
         c = round(c ./ QTAB);
         if(k <= Datalen)
-            c = uint8(c);
             if(i == 1 && (j == 1 || j == 2))
                 for k = 1:16
-                    c(k) = bitset(c(k), 1, Datalenbit(16*(j-1)+k));
+                    c(k) = double(bitset(int8(c(k)), 1, Datalenbit(16*(j-1)+k)));
                 end
                 k = 0;
             else
@@ -53,7 +52,7 @@ for i = 1:newhwlen(1)/8
                         break;
                     end
                     temp = bitget(Data(k),8:-1:1);
-                    c(8*l - 7:8*l)= bitset(c(8*l - 7:8*l), 1, temp);
+                    c(8*l - 7:8*l)= double(bitset(int8(c(8*l - 7:8*l)), 1, temp));
                 end
             end
         end
@@ -247,7 +246,7 @@ for i = 1:size(coef,2)
     if(decodeflag)
         if(i == 1 || i == 2)
             for k = 1:16
-                temp = bitget(block88(k),1);
+                temp = bitget(int8(block88(k)),1);
                 bitoflen = [bitoflen num2str(temp)];
             end
         else
@@ -255,7 +254,7 @@ for i = 1:size(coef,2)
                 if(j*2 + ceil(k/8) > bitlen + 4)
                     decodeflag = false;
                 end
-                temp = bitget(block88(k),1);
+                temp = bitget(int8(block88(k)),1);
                 bitofchrac = [bitofchrac num2str(temp)];
                 if(~mod(k,8))
                     GetData = [GetData char(bin2dec(bitofchrac))];
@@ -274,7 +273,7 @@ for i = 1:size(coef,2)
 end
 img = img + 128;
 imshow(uint8(img));
-imwrite(im2uint8(img), 'secondhidden.jpg');
+imwrite(uint8(img), 'secondhidden.jpg');
 
 psnrvalue = psnr(uint8(img), hall_gray)
 % save Dc_ceof Ac_ceof height width
