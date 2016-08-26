@@ -2,25 +2,21 @@ clear all; close all;
 load hall.mat
 
 part = hall_gray(11:18,21:28);
-N = 8;
+C = dct2(part - uint8(128));
 
-D = zeros(N,N);
-for i = 1:N
-    for j = 1:N
-        D(i,j) = cos(pi*(i-1)*(2*j-1)/(2*N));
-    end
-end
-D(1,:) = sqrt(1/2);
-D = D *sqrt(2/N);
-
-C = D*double(part)*D';
-
-D1 = rot90(D); D2 = rot90(D1);
-rightzeropart = D1'*C*D1;
-leftzeropart = D2'*C*D2;
+C0 = C'; C1 = rot90(C); C2 = rot90(C1);
+transpose = uint8(idct2(C) + 128);
+rightrot90 = uint8(idct2(C1) + 128);
+rightrot180 = uint8(idct2(C2) + 128);
 
 imshow(part);
+imwrite(part,'origin_rot.jpg');
 figure();
-imshow(rightzeropart);
+imshow(transpose);
+imwrite(transpose, 'transpose.jpg');
 figure();
-imshow(leftzeropart);
+imshow(rightrot90);
+imwrite(rightrot90, 'rightrot90.jpg');
+figure();
+imshow(rightrot180);
+imwrite(rightrot180, 'rightrot180.jpg');

@@ -17,3 +17,5 @@ C_my = D*double(part)*D';
 C = dct2(part);
 
 norm(C_my-C)
+
+% ans = 1.0899e-12
