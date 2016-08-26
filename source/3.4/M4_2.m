@@ -57,4 +57,4 @@ for k = 2:length(sample)
 end
 
 imshow(img)
-saveas(gcf, 'face_recongnize.bmp');
+saveas(gcf, 'face_recongnize.jpg');

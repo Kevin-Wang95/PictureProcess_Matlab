@@ -58,4 +58,4 @@ end
 
 
 imshow(img)
-saveas(gcf, 'rotation.bmp');
+saveas(gcf, 'rotation.jpg');

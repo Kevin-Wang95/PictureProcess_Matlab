@@ -217,7 +217,7 @@ for i = 1:size(coef,2)
 end
 img = img + 128;
 imshow(uint8(img));
-imwrite(im2uint8(img), 'halfqulidecode.jpg');
+imwrite(uint8(img), 'halfqulidecode.jpg');
 
 psnrvalue = psnr(uint8(img), hall_gray)
 

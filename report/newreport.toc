@@ -17,24 +17,25 @@
 \contentsline {subsection}{\numberline {4.9}请实现JPEG编码，输出为DC系数的码流、AC系数的码流、图像高度和图像宽度，将这四个变量写入jpegcodes.mat文件}{7}{subsection.4.9}
 \contentsline {subsubsection}{\numberline {4.9.1}分块、DCT、量化}{7}{subsubsection.4.9.1}
 \contentsline {subsubsection}{\numberline {4.9.2}DC熵编码}{7}{subsubsection.4.9.2}
+\contentsline {subsubsection}{\numberline {4.9.3}AC熵编码}{7}{subsubsection.4.9.3}
 \contentsline {subsection}{\numberline {4.10}计算压缩比}{9}{subsection.4.10}
 \contentsline {subsection}{\numberline {4.11}请实现JPEG解码，输入是你生成的jpegcodes.mat文件。分别用客观(PSNR)和主观方法评价编解码效果如何。}{9}{subsection.4.11}
-\contentsline {subsection}{\numberline {4.12}将量化步长减小为原来一半，重做编解码。同标准量化步长的情况比较压缩比和图像质量。}{9}{subsection.4.12}
-\contentsline {subsection}{\numberline {4.13}看电视时偶尔能看到美丽的雪花图像(见snow.mat)，请对其编解码。和测试图像的压缩比和图像质量进行比较，并解释比较结果。}{9}{subsection.4.13}
-\contentsline {section}{\numberline {5}信息隐藏}{9}{section.5}
-\contentsline {subsection}{\numberline {5.1}实现本章介绍的空域隐藏方法和提取方法。验证其抗JPEG编码能力。}{9}{subsection.5.1}
-\contentsline {subsection}{\numberline {5.2}依次实现本章介绍的三种变换域信息隐藏方法和提取方法，分析嵌密方法的隐蔽性以及嵌密后JPEG图像的质量变化和压缩比变化}{9}{subsection.5.2}
-\contentsline {subsection}{\numberline {5.3}请设计实现新的隐藏算法并分析其优缺点}{10}{subsection.5.3}
-\contentsline {section}{\numberline {6}人脸识别}{10}{section.6}
-\contentsline {subsection}{\numberline {6.1}所给资料Faces目录下包含从网络中截取的28张人脸，试以其作为样本训练人脸标准v}{10}{subsection.6.1}
-\contentsline {subsubsection}{\numberline {6.1.1}样本人脸大小不一致，是否需要首先将图像调整为相同大小}{10}{subsubsection.6.1.1}
-\contentsline {subsubsection}{\numberline {6.1.2}假设L = 3,4,5,所得的三个v之间有什么关系？}{10}{subsubsection.6.1.2}
-\contentsline {subsection}{\numberline {6.2}设计一种从任意大小的图片中检测任意多张人脸的算法并编程实现(输出图像在判定为人脸的位置加上红色的方框)。随意选取一张多人的照片，对程序进行测试。尝试L分别取不同的值，评价检测结果的区别。}{10}{subsection.6.2}
-\contentsline {subsection}{\numberline {6.3}对上述图像分别进行如下处理后}{10}{subsection.6.3}
-\contentsline {subsubsection}{\numberline {6.3.1}顺时针旋转90度}{10}{subsubsection.6.3.1}
-\contentsline {subsubsection}{\numberline {6.3.2}保持高度不变，宽度变为原来的2倍}{10}{subsubsection.6.3.2}
-\contentsline {subsubsection}{\numberline {6.3.3}适当改变颜色}{10}{subsubsection.6.3.3}
-\contentsline {subsection}{\numberline {6.4}如果可以重新选择人脸样本的训练标准，你觉得应该如何选取？}{10}{subsection.6.4}
-\contentsline {section}{\numberline {7}实验总结}{11}{section.7}
-\contentsline {section}{\numberline {A}代码清单}{11}{appendix.A}
+\contentsline {subsection}{\numberline {4.12}将量化步长减小为原来一半，重做编解码。同标准量化步长的情况比较压缩比和图像质量。}{13}{subsection.4.12}
+\contentsline {subsection}{\numberline {4.13}看电视时偶尔能看到美丽的雪花图像(见snow.mat)，请对其编解码。和测试图像的压缩比和图像质量进行比较，并解释比较结果。}{17}{subsection.4.13}
+\contentsline {section}{\numberline {5}信息隐藏}{17}{section.5}
+\contentsline {subsection}{\numberline {5.1}实现本章介绍的空域隐藏方法和提取方法。验证其抗JPEG编码能力。}{17}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}依次实现本章介绍的三种变换域信息隐藏方法和提取方法，分析嵌密方法的隐蔽性以及嵌密后JPEG图像的质量变化和压缩比变化}{19}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}请设计实现新的隐藏算法并分析其优缺点}{23}{subsection.5.3}
+\contentsline {section}{\numberline {6}人脸识别}{26}{section.6}
+\contentsline {subsection}{\numberline {6.1}所给资料Faces目录下包含从网络中截取的28张人脸，试以其作为样本训练人脸标准v}{26}{subsection.6.1}
+\contentsline {subsubsection}{\numberline {6.1.1}样本人脸大小不一致，是否需要首先将图像调整为相同大小}{26}{subsubsection.6.1.1}
+\contentsline {subsubsection}{\numberline {6.1.2}假设L = 3,4,5,所得的三个v之间有什么关系？}{26}{subsubsection.6.1.2}
+\contentsline {subsection}{\numberline {6.2}设计一种从任意大小的图片中检测任意多张人脸的算法并编程实现(输出图像在判定为人脸的位置加上红色的方框)。随意选取一张多人的照片，对程序进行测试。尝试L分别取不同的值，评价检测结果的区别。}{27}{subsection.6.2}
+\contentsline {subsection}{\numberline {6.3}对上述图像分别进行如下处理后}{29}{subsection.6.3}
+\contentsline {subsubsection}{\numberline {6.3.1}顺时针旋转90度}{29}{subsubsection.6.3.1}
+\contentsline {subsubsection}{\numberline {6.3.2}保持高度不变，宽度变为原来的2倍}{30}{subsubsection.6.3.2}
+\contentsline {subsubsection}{\numberline {6.3.3}适当改变颜色}{30}{subsubsection.6.3.3}
+\contentsline {subsection}{\numberline {6.4}如果可以重新选择人脸样本的训练标准，你觉得应该如何选取？}{30}{subsection.6.4}
+\contentsline {section}{\numberline {7}实验总结}{30}{section.7}
+\contentsline {section}{\numberline {A}代码清单}{30}{appendix.A}
 \contentsfinish 

@@ -30,10 +30,10 @@ end
 
 figure(1)
 imshow(hall_gray);
-imwrite(hall_gray,'hall_gray.bmp');
+imwrite(hall_gray,'hallgray.jpg');
 figure(2)
 imshow(afterimg);
-imwrite(afterimg,'Afterhidden.bmp')
+imwrite(afterimg,'Afterhidden.jpg')
 
 % Fetch
 fetchbit = [];

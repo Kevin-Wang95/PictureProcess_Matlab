@@ -58,4 +58,4 @@ end
 
 
 imshow(img)
-saveas(gcf, 'resize.bmp');
+saveas(gcf, 'resize.jpg');

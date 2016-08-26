@@ -22,6 +22,7 @@ end
 v_mean = mean(v, 1);
 subplot(3,1,ii)
 plot(1:length(v_mean),v_mean);
+title(['L = ' num2str(ii+2)])
 end
 save features.mat v_mean
-saveas(gcf, 'L_from_three_to_five.bmp');
+saveas(gcf, 'L_from_three_to_five.jpg');

@@ -57,4 +57,4 @@ end
 
 
 imshow(img)
-saveas(gcf, 'imadjust.bmp');
+saveas(gcf, 'imadjust.jpg');
